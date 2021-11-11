@@ -4,7 +4,7 @@ from test_process import get_file_name_for_args
 # Ввод пути в файловой системе
 def input_path(message):
     path = input(message)
-    if path[len(path) - 1] != "\\":
+    if len(path) != 0 and path[len(path) - 1] != "\\":
         path += "\\"
     return path
 

@@ -57,13 +57,13 @@ def file_mode():
         elif choice == 3:
             if tests_path == "":
                 tests_path = t.create_test_dir()
-            if t.if_exists(exe_path, "app.exe"):
+            if t.if_exists(exe_path, "app.exe") and t.if_exists("", "tests.txt") and t.if_exists("", "tests_args.txt"):
                 pos_amount = c.input_tests_amount("pos")
                 t.make_tests(pos_amount, "pos", tests_path, exe_path, out_file_mode, 1)
         elif choice == 4:
             if tests_path == "":
                 tests_path = t.create_test_dir()
-            if t.if_exists(exe_path, "app.exe"):
+            if t.if_exists(exe_path, "app.exe") and t.if_exists("", "tests.txt") and t.if_exists("", "tests_args.txt"):
                 neg_amount = c.input_tests_amount("neg")
                 t.make_tests(neg_amount, "neg", tests_path, exe_path, out_file_mode, 1)
         elif choice == -1:
