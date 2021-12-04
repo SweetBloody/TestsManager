@@ -1,4 +1,4 @@
-from test_process import get_file_name_for_args
+from test_process import get_file_name_for_args, get_double_file_name_for_args
 
 
 # Ввод пути в файловой системе
@@ -46,6 +46,12 @@ def input_arguments():
     return args
 
 
+# Ввод количества входных файлов
+def input_in_file_mode():
+    in_file_mode = input_number("Введите количество входных файлов:\n")
+    return in_file_mode
+
+
 # Чтение аргументов из файла настроек
 def input_arguments_from_file(file):
     string = file.readline()
@@ -55,9 +61,16 @@ def input_arguments_from_file(file):
 
 
 # Запись аргументов в файл
-def print_args_to_file(file_name, args, mode, index, out_file_mode):
+def print_args_to_file(file_name, args, mode, index, out_file_mode, in_file_mode):
     file = open(file_name, 'w')
-    in_file = get_file_name_for_args(mode, index, "in")
+    in_file_2 = ""
+    if in_file_mode == 1:
+        in_file_1 = get_file_name_for_args(mode, index, "in")
+        in_file = in_file_1
+    else:
+        in_file_1 = get_double_file_name_for_args(mode, index, "in", 1)
+        in_file_2 = get_double_file_name_for_args(mode, index, "in", 2)
+        in_file = in_file_1 + " " + in_file_2
     out_file = get_file_name_for_args(mode, index, "out")
     if out_file_mode == 1:
         file.write(in_file + " " + out_file + " " + args + "\n")
@@ -118,6 +131,7 @@ def print_manual_menu_table():
     print("│", "  3. Ввести позитивные тесты                      ", "│")
     print("│", "  4. Ввести негативные тесты                      ", "│")
     print("│", "  5. Изменить/создать отдельный тест              ", "│")
+    print("│", "  6. Выбор количества входных файлов              ", "│")
     print("│", " -1. Важная информация о программе                ", "│")
     print("│", "  0. Выход                                        ", "│")
     print("└", "─" * 50, "┘")
@@ -127,8 +141,8 @@ def print_manual_menu_table():
 def manual_menu():
     choice = ""
     print_manual_menu_table()
-    while type(choice) == str or choice < -1 or choice > 5:
-        choice = input_number("Введите необходимый пункт меню (от -1 до 5):\n")
+    while type(choice) == str or choice < -1 or choice > 6:
+        choice = input_number("Введите необходимый пункт меню (от -1 до 6):\n")
     return choice
 
 
@@ -140,6 +154,7 @@ def print_file_menu_table():
     print("│", "  2. Ввести путь нахождения исполнительного файла ", "│")
     print("│", "  3. Создать позитивные тесты                     ", "│")
     print("│", "  4. Создать негативные тесты                     ", "│")
+    print("│", "  5. Выбор количества входных файлов              ", "│")
     print("│", " -1. Важная информация о программе                ", "│")
     print("│", " -2. Создать примеры файлов настроек              ", "│")
     print("│", "  0. Выход                                        ", "│")
@@ -150,8 +165,8 @@ def print_file_menu_table():
 def file_menu():
     choice = ""
     print_file_menu_table()
-    while type(choice) == str or choice < -2 or choice > 4:
-        choice = input_number("Введите необходимый пункт меню (от -2 до 4):\n")
+    while type(choice) == str or choice < -2 or choice > 5:
+        choice = input_number("Введите необходимый пункт меню (от -2 до 5):\n")
     return choice
 
 

@@ -5,6 +5,7 @@ import example_file as e
 
 def manual_mode():
     choice = -1
+    in_file_mode = 1
     if t.if_exists("", "func_tests"):
         tests_path = "func_tests\\"
     else:
@@ -22,13 +23,13 @@ def manual_mode():
                 tests_path = t.create_test_dir()
             if t.if_exists(exe_path, "app.exe"):
                 pos_amount = c.input_tests_amount("pos")
-                t.make_tests(pos_amount, "pos", tests_path, exe_path, out_file_mode, 2)
+                t.make_tests(pos_amount, "pos", tests_path, exe_path, out_file_mode, 2, in_file_mode)
         elif choice == 4:
             if tests_path == "":
                 tests_path = t.create_test_dir()
             if t.if_exists(exe_path, "app.exe"):
                 neg_amount = c.input_tests_amount("neg")
-                t.make_tests(neg_amount, "neg", tests_path, exe_path, out_file_mode, 2)
+                t.make_tests(neg_amount, "neg", tests_path, exe_path, out_file_mode, 2, in_file_mode)
         elif choice == 5:
             if tests_path == "":
                 tests_path = t.create_test_dir()
@@ -36,12 +37,15 @@ def manual_mode():
                 mode = c.input_test_type()
                 index = c.input_number("Введите номер теста, который хотите изменить:\n")
                 t.manual_make_test(index, mode, tests_path, exe_path, out_file_mode)
+        elif choice == 6:
+            in_file_mode = c.input_in_file_mode()
         elif choice == -1:
             c.info(2)
 
 
 def file_mode():
     choice = -1
+    in_file_mode = 1
     if t.if_exists("", "func_tests"):
         tests_path = "func_tests\\"
     else:
@@ -57,15 +61,18 @@ def file_mode():
         elif choice == 3:
             if tests_path == "":
                 tests_path = t.create_test_dir()
-            if t.if_exists(exe_path, "app.exe") and t.if_exists("", "tests.txt") and t.if_exists("", "tests_args.txt"):
+            if t.if_exists(exe_path, "app.exe") and (t.if_exists("", "tests.txt") or t.if_exists("", "tests_1.txt")
+                                                     or t.if_exists("", "tests_2.txt")) and t.if_exists("", "tests_args.txt"):
                 pos_amount = c.input_tests_amount("pos")
-                t.make_tests(pos_amount, "pos", tests_path, exe_path, out_file_mode, 1)
+                t.make_tests(pos_amount, "pos", tests_path, exe_path, out_file_mode, 1, in_file_mode)
         elif choice == 4:
             if tests_path == "":
                 tests_path = t.create_test_dir()
             if t.if_exists(exe_path, "app.exe") and t.if_exists("", "tests.txt") and t.if_exists("", "tests_args.txt"):
                 neg_amount = c.input_tests_amount("neg")
-                t.make_tests(neg_amount, "neg", tests_path, exe_path, out_file_mode, 1)
+                t.make_tests(neg_amount, "neg", tests_path, exe_path, out_file_mode, 1, in_file_mode)
+        elif choice == 5:
+            in_file_mode = c.input_in_file_mode()
         elif choice == -1:
             c.info(1)
         elif choice == -2:
